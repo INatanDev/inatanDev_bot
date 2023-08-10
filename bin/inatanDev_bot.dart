@@ -1,13 +1,21 @@
-
 import 'dart:io';
 
 import 'questions/time_questions.dart';
 import 'timing/waintg_time.dart';
 
-void main() async{
+void main() async {
   String inatanDev = 'inatanDev:\n';
   var a = true;
   String usuario = '';
+
+  var myStream = BotClock().inatanDevStream(1, 10);
+  var subscriber = myStream.listen((event) {
+    print(
+        '                          inatanDev is activated for $event seconds');
+  }, onDone: () {
+    print('inatanDev is finishing its work, ask the last question!');
+    a = false;
+  });
 
   print('-- Iniciando o inatanDev, aguarde..--');
   await BotClock().clock(3);
@@ -15,7 +23,7 @@ void main() async{
   do {
     usuario = stdin.readLineSync().toString();
     print('-- Processando pergunta, aguarde..--');
-     await BotClock().clock(1);
+    await BotClock().clock(1);
     if (usuario.contains('xau') ||
         usuario.contains('Xau') ||
         usuario.contains('Adeus') ||
@@ -25,11 +33,11 @@ void main() async{
     } else if (TimeQuestions(usuario).isThisTime()) {
       // verificar antes, assim não fazemos toda a função sem precisar.
       TimeQuestions(usuario).timeQuestion();
-      await  BotClock().clock(1);
+      await BotClock().clock(1);
     } else if (false) {
       //Basta adicionar novas perguntas aqui!
     } else {
-      await  BotClock().clock(2);
+      await BotClock().clock(2);
       print(inatanDev +
           ' Não fui treinado para responder a essa pergunta \n Desculpe :( ');
       print(inatanDev + ' Você pode fazer outra pergunta ou dizer Adeus');
