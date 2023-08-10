@@ -9,6 +9,6 @@ class BotClock {
       await Future.delayed(Duration(seconds: interval));
       yield i++;
     }
-    print('The strem is finish');
+    print('A Stream terminou');
   }
 }

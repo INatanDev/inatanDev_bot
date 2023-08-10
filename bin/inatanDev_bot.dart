@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'questions/good_manners.dart';
 import 'questions/time_questions.dart';
 import 'timing/waintg_time.dart';
 
@@ -10,10 +11,9 @@ void main() async {
 
   var myStream = BotClock().inatanDevStream(1, 10);
   var subscriber = myStream.listen((event) {
-    print(
-        '                          inatanDev is activated for $event seconds');
+    print('                          inatanDev esta ativa a: $event segundos');
   }, onDone: () {
-    print('inatanDev is finishing its work, ask the last question!');
+    print('inatanDev esta sendo finalizado!Faca a ultima pergunta.');
     a = false;
   });
 
@@ -34,6 +34,8 @@ void main() async {
       // verificar antes, assim não fazemos toda a função sem precisar.
       TimeQuestions(usuario).timeQuestion();
       await BotClock().clock(1);
+    } else if (GoodManners(usuario).isThisManners()) {
+      GoodManners(usuario).goodManners();
     } else if (false) {
       //Basta adicionar novas perguntas aqui!
     } else {
